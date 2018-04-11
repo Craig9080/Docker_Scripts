@@ -1,5 +1,7 @@
 <?php
-shell_exec('bash /gitclone.sh');
+chdir('/');
+$input = system('bash ./gitclone.sh');
+chdir('var/www/html');
 $files = glob('/admin/*.{sh}', GLOB_BRACE);
 foreach($files as $file) {
  $output = shell_exec("bash $file");

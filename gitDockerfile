@@ -22,7 +22,7 @@ RUN echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
 
 
 
-ENTRYPOINT service ssh start && cd /project && git commit -m "Initial Commit" && ssh-agent bash -c 'ssh-add /SSH_Priv.key; git push origin HEAD:master' && bash
+ENTRYPOINT service ssh start && cd /project && git commit -m "Initial Commit" && ssh-agent bash -c 'ssh-add /SSH_Priv.key; git push origin HEAD:master'  && bash
 
 
 
