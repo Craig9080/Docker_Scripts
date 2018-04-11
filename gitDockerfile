@@ -1,0 +1,29 @@
+FROM debian:stretch
+
+MAINTAINER Craig Laprade
+
+
+
+RUN apt-get update -y
+RUN apt-get install nano apt-utils git ufw openssh-server -y
+RUN useradd -ms /bin/bash admin
+RUN echo 'admin:empiredidnothingwrong' | chpasswd
+RUN mkdir /repos
+RUN git init --bare /repos/admin.git
+RUN chown -R admin /repos/admin.git
+RUN mkdir /project && cd /project && git init && git remote add origin ssh://admin@127.0.0.1/repos/admin.git
+COPY ps.sh /project
+COPY SSH_Pub.key /home/admin/.ssh/authorized_keys
+COPY SSH_Priv.key /SSH_Priv.key
+RUN chmod 600 /SSH_Priv.key
+RUN chown -R admin /home/admin
+RUN cd /project && git add . && git config --global user.email "you@example.com" && git config --global user.name "Your Name"	
+RUN echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
+
+
+
+ENTRYPOINT service ssh start && cd /project && git commit -m "Initial Commit" && ssh-agent bash -c 'ssh-add /SSH_Priv.key; git push origin HEAD:master' && bash
+
+
+
+EXPOSE 22/TCP
