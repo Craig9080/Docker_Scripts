@@ -8,7 +8,8 @@ This set of scripts established two docker containers based off of Debian Stretc
 
 The deployment of these containers in this automated form must be done as root
 
-```# git clone https://github.com/Craig9080/Docker_Scripts.git
+```
+# git clone https://github.com/Craig9080/Docker_Scripts.git
 # cd Docker_Scripts
 # chmod +x setup.sh
 # ./setup.sh
@@ -19,7 +20,8 @@ Following the successful establishment of the two containers you can browse to h
 
 The best way to add scripts to connect to the git server via it's exposed SSH Server as demonstrated below
 
-```mkdir scripts_to_run
+```
+mkdir scripts_to_run
 cd scripts_to_run
 git init
 git remote add origin ssh://admin@127.0.0.1:/repos/admin.git
