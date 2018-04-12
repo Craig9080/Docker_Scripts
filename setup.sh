@@ -8,7 +8,7 @@ apt-get install docker-engine -y
 docker pull debian:stretch
 docker network create --subnet 172.99.1.0/24 Git_Net
 docker build -t gitserver --file gitDockerfile .
-docker run --network Git_Net -td gitserver:latest 
+docker run --network Git_Net -p 22:22 -td gitserver:latest 
 docker build --network Git_Net -t apacheserver --file ApacheDockerfile .
 docker run --network Git_Net -td -p 443:443 apacheserver:latest 
 
