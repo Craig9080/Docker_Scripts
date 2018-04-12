@@ -17,5 +17,5 @@ Following the successful establishment of the two containers you can browse to h
 
 ### Adding Scripts
 
-The best way to add scripts to the repo and see them executed is to edit them at thier pre-staged location on the git server (i.e. NOT the actual location of the repo on the git server)
+The best way to add scripts to the repo and see them executed is to edit them at thier pre-staged location on the git server (i.e. NOT the actual location of the repo on the git server).  To do this you should run the command `docker containers ls` and see which container holds the git server which will have the image `gitserver:latest`. The name will be all the way to the right of the chart.  Use this name and execute the following command to get a shell on that machine: `docker exec -ti <name> bash`.  You now have a shell on the git server! Execute the following steps to add any scripts you want into the `/project` folder which has already been established as a 
 
