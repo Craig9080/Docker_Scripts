@@ -10,12 +10,12 @@ RUN echo Listen 443 >> /etc/apache2/apache2.conf
 COPY ssl.conf /etc/apache2/sites-enabled/000-default.conf
 COPY index.php /var/www/html/index.php
 COPY SSH_Priv.key /SSH_Priv.key
-RUN chmod a+r SSH_Priv.key
 COPY gitclone.sh /gitclone.sh
 RUN chmod +x /gitclone.sh
 RUN chmod 600 /SSH_Priv.key
+RUN chmod a+r /SSH_Priv.key
 RUN a2enmod ssl
 RUN echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
-RUN ssh-agent bash -c 'ssh-add /SSH_Priv.key; git clone ssh://admin@172.99.1.2:/repos/admin.git'
+#RUN cd /tmp && ssh-agent bash -c 'ssh-add /SSH_Priv.key; git clone ssh://admin@172.99.1.2:/repos/admin.git'
 
 ENTRYPOINT service apache2 start && bash
